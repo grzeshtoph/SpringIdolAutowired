@@ -4,14 +4,15 @@ import com.springinaction.springidol.PerformanceException;
 import com.springinaction.springidol.poems.Poem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
 
 /**
  * Poetic juggler. Juggles and recites a poem.
  */
 public class PoeticJuggler extends Juggler {
     private static final Logger LOG = LoggerFactory.getLogger(PoeticJuggler.class);
-    @Autowired
+    @Inject
     private Poem poem;
 
     public PoeticJuggler(String email, Poem poem) {

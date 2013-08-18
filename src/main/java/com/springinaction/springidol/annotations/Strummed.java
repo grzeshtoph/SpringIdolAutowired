@@ -1,4 +1,4 @@
-package com.springinaction.springidol;
+package com.springinaction.springidol.annotations;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -8,10 +8,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to qualify a stringed instrument.
+ * Additional annotation to qualify a quitar.
  */
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
-public @interface StringedInstrument {
+public @interface Strummed {
 }
