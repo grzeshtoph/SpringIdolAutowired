@@ -1,10 +1,9 @@
 package com.springinaction.springidol.performers;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.base.Functions;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.springinaction.springidol.PerformanceException;
+import com.springinaction.springidol.TestUtils;
 import com.springinaction.springidol.instruments.ContestInstrument;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
@@ -24,9 +22,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration("/spring-idol.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InstrumentalistTest {
-    private static final String SONG_PATTERN = "song=[a-zA-Z! ]+\\,";
-    private static final String REPLACEMENT = "song=<SONG>,";
-    private final Pattern pattern = Pattern.compile(SONG_PATTERN);
     @Autowired
     private Instrumentalist kenny;
     @Autowired
@@ -69,10 +64,10 @@ public class InstrumentalistTest {
     public void toStringTest() {
         assertEquals("Instrumentalist{performerName=kenny, email=kenny@gmail.com, age=37, " +
                 "song=<SONG>, instrument=ContestInstrument{instrumentName=saxophone, " +
-                "instrumentSound=SAXOPHONE}}", replaceSong(kenny.toString()));
+                "instrumentSound=SAXOPHONE}}", TestUtils.replaceSong(kenny.toString()));
         assertEquals("Instrumentalist{performerName=kenny2, email=kenny2@gmail.com, age=0, " +
                 "song=<SONG>, instrument=ContestInstrument{instrumentName=piano, " +
-                "instrumentSound=PIANO}}", replaceSong(kenny2.toString()));
+                "instrumentSound=PIANO}}", TestUtils.replaceSong(kenny2.toString()));
     }
 
     @Test
@@ -114,7 +109,4 @@ public class InstrumentalistTest {
         assertFalse(kenny2.equals(kenny2Clone));
     }
 
-    private String replaceSong(String toStringValue) {
-        return pattern.matcher(toStringValue).replaceAll(REPLACEMENT);
-    }
 }

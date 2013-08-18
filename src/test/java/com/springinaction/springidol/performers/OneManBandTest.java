@@ -44,7 +44,7 @@ public class OneManBandTest {
     public void toStringTest() {
         assertEquals("OneManBand{performerName=hank, " +
                 "email=hank@gmail.com, " +
-                "instruments={GUITAR=ContestInstrument{instrumentName=guitar, instrumentSound=GUITAR}, " +
+                "instruments={GUITAR=Guitar{instrumentName=guitar, instrumentSound=GUITAR}, " +
                 "CYMBAL=ContestInstrument{instrumentName=cymbal, instrumentSound=CYMBAL}, " +
                 "HARMONICA=ContestInstrument{instrumentName=harmonica, instrumentSound=HARMONICA}}}",
                 hank.toString());

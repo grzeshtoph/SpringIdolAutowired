@@ -2,10 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd"
        xmlns:p="http://www.springframework.org/schema/p"
        default-init-method="init">
+
+    <context:annotation-config/>
 
     <util:map id="instrumentSounds">
         <entry key="GUITAR" value="#{T(com.springinaction.springidol.instruments.InstrumentSound).GUITAR}"/>
@@ -23,7 +27,6 @@
     <bean id="poeticDuke" class="com.springinaction.springidol.performers.PoeticJuggler">
         <constructor-arg name="email" value="poeticDuke@gmail.com"/>
         <constructor-arg name="beanBags" value="#{4 * 5}"/>
-        <constructor-arg name="poem" value="#{sonnet29}"/>
     </bean>
 
     <bean id="kenny" class="com.springinaction.springidol.performers.Instrumentalist"
@@ -35,6 +38,17 @@
     <bean id="kenny2" class="com.springinaction.springidol.performers.Instrumentalist"
           p:song="#{songSelector.selectSong()?.toUpperCase()}" p:instrument="#{piano}">
         <constructor-arg value="kenny2@gmail.com"/>
+    </bean>
+
+    <bean id="eddie" class="com.springinaction.springidol.performers.EddieInstrumentalist"
+          p:song="#{songSelector.selectSong()?.toLowerCase()}" p:age="#{kenny.age}">
+        <constructor-arg value="eddie@gmail.com"/>
+    </bean>
+
+    <bean id="carl" class="com.springinaction.springidol.performers.Instrumentalist"
+          p:song="#{songSelector.selectSong()?.toUpperCase()}" p:age="#{kenny.age}"
+          p:instrument="#{kenny.instrument}">
+        <constructor-arg value="carl@gmail.com"/>
     </bean>
 
     <bean id="hank" class="com.springinaction.springidol.performers.OneManBand">
@@ -80,11 +94,6 @@
         <constructor-arg value="hank4@gmail.com"/>
     </bean>
 
-    <bean id="carl" class="com.springinaction.springidol.performers.Instrumentalist"
-          p:song="#{songSelector.selectSong()?.toUpperCase()}" p:age="#{kenny.age}"
-          p:instrument="#{kenny.instrument}">
-        <constructor-arg value="carl@gmail.com"/>
-    </bean>
 
     <bean id="sonnet29" class="com.springinaction.springidol.poems.Sonnet29"/>
 
@@ -97,7 +106,7 @@
     <bean id="cymbal" class="com.springinaction.springidol.instruments.ContestInstrument"
           p:instrumentSound="#{instrumentSounds['CYMBAL']}"/>
 
-    <bean id="guitar" class="com.springinaction.springidol.instruments.ContestInstrument"
+    <bean id="guitar" class="com.springinaction.springidol.instruments.Guitar"
           p:instrumentSound="#{instrumentSounds['GUITAR']}"/>
 
     <bean id="harmonica" class="com.springinaction.springidol.instruments.ContestInstrument"
@@ -108,19 +117,17 @@
 
     <bean id="songSelector" class="com.springinaction.springidol.SongSelector" factory-method="getInstance"/>
 
-    <bean id="ticketExtra" class="com.springinaction.springidol.Ticket" scope="prototype">
+    <bean id="ticketExtra" class="com.springinaction.springidol.Ticket" scope="prototype"
+          p:ticketNo="#{ticketNo}">
         <constructor-arg value="#{theStage.stageName matches '.*USA.*'}"/>
-        <property name="ticketNo">
-            <bean factory-bean="ticketCounter" factory-method="getNextNumber"/>
-        </property>
     </bean>
 
-    <bean id="ticketNormal" class="com.springinaction.springidol.Ticket" scope="prototype">
+    <bean id="ticketNormal" class="com.springinaction.springidol.Ticket" scope="prototype"
+          p:ticketNo="#{ticketNo}">
         <constructor-arg value="#{theStage.stageName matches '.*PKiN.*'}"/>
-        <property name="ticketNo">
-            <bean factory-bean="ticketCounter" factory-method="getNextNumber"/>
-        </property>
     </bean>
 
     <bean id="ticketCounter" class="com.springinaction.springidol.TicketCounter"/>
+
+    <bean id="ticketNo" factory-bean="ticketCounter" factory-method="getNextNumber" lazy-init="true"/>
 </beans>

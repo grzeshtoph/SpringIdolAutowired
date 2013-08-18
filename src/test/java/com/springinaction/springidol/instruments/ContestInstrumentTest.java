@@ -78,7 +78,7 @@ public class ContestInstrumentTest {
     @Test
     public void guitarTest() {
         assertNotNull(guitar);
-        assertEquals("ContestInstrument{instrumentName=guitar, instrumentSound=GUITAR}",
+        assertEquals("Guitar{instrumentName=guitar, instrumentSound=GUITAR}",
                 guitar.toString());
         assertEquals("guitar", guitar.getInstrumentName());
         assertEquals(InstrumentSound.GUITAR, guitar.getInstrumentSound());
