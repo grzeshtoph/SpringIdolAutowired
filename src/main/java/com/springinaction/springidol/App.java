@@ -1,5 +1,7 @@
 package com.springinaction.springidol;
 
+import com.springinaction.springidol.artifacts.Knife;
+import com.springinaction.springidol.performers.KnifeJuggler;
 import com.springinaction.springidol.performers.Performer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,5 +48,11 @@ public class App {
 
         performer = (Performer) ctx.getBean("carl");
         performer.perform();
+
+        Knife knife = (Knife) ctx.getBean("knife");
+        knife.printId();
+
+        KnifeJuggler toby = (KnifeJuggler) ctx.getBean("toby");
+        toby.perform();
     }
 }

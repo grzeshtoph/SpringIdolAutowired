@@ -24,6 +24,10 @@
         <constructor-arg name="beanBags" value="15"/>
     </bean>
 
+    <bean id="toby" class="com.springinaction.springidol.performers.KnifeJuggler">
+        <constructor-arg value="toby@gmail.com"/>
+    </bean>
+
     <bean id="poeticDuke" class="com.springinaction.springidol.performers.PoeticJuggler">
         <constructor-arg name="email" value="poeticDuke@gmail.com"/>
         <constructor-arg name="beanBags" value="#{4 * 5}"/>
@@ -94,8 +98,9 @@
         <constructor-arg value="hank4@gmail.com"/>
     </bean>
 
+    <bean id="sonnet29" class="com.springinaction.springidol.artifacts.Sonnet29"/>
 
-    <bean id="sonnet29" class="com.springinaction.springidol.poems.Sonnet29"/>
+    <bean id="knife" class="com.springinaction.springidol.artifacts.Knife" scope="prototype"/>
 
     <bean id="saxophone" class="com.springinaction.springidol.instruments.ContestInstrument"
           p:instrumentSound="#{instrumentSounds['SAXOPHONE']}"/>
@@ -129,5 +134,6 @@
 
     <bean id="ticketCounter" class="com.springinaction.springidol.TicketCounter"/>
 
-    <bean id="ticketNo" factory-bean="ticketCounter" factory-method="getNextNumber" lazy-init="true"/>
+    <bean id="ticketNo" factory-bean="ticketCounter" factory-method="getNextNumber"
+          lazy-init="true"/>
 </beans>

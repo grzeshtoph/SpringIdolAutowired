@@ -1,6 +1,6 @@
 package com.springinaction.springidol.performers;
 
-import com.springinaction.springidol.poems.Sonnet29;
+import com.springinaction.springidol.artifacts.Sonnet29;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

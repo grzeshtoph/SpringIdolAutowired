@@ -1,4 +1,4 @@
-package com.springinaction.springidol.poems;
+package com.springinaction.springidol.artifacts;
 
 /**
  * Poem interface for poetic jugglers performances.

@@ -2,9 +2,9 @@ package com.springinaction.springidol;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class Ticket {
     private static final Logger LOG = LoggerFactory.getLogger(Ticket.class);
@@ -21,7 +21,7 @@ public class Ticket {
             LOG.debug("Ticker has extra price, as the venue is special");
     }
 
-    int getTicketNo() {
+    public int getTicketNo() {
         return ticketNo;
     }
 

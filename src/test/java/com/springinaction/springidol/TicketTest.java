@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.inject.Provider;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -33,7 +35,7 @@ public class TicketTest {
         assertTrue(ticketExtra.getTicketNo() > 0);
         assertTrue(ticketNormal.getTicketNo() > 0);
         Ticket ticket3 = new Ticket(false);
-        ticket3.setTicketNo(ticketCounter.getNextNumber());
+        ticket3.setTicketNo(ticketNormal.getTicketNo());
         assertTrue(ticket3.getTicketNo() > 0);
     }
 }
