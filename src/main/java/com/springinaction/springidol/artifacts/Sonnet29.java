@@ -3,10 +3,12 @@ package com.springinaction.springidol.artifacts;
 import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * A concrete poem to recite.
  */
+@Component
 public class Sonnet29 implements Poem {
     private static final Logger LOG = LoggerFactory.getLogger(Sonnet29.class);
     private static final ImmutableList<String> LINES = ImmutableList.of(

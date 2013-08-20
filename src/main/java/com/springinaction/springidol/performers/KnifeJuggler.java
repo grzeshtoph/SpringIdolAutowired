@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
 import java.util.Set;
 
@@ -23,11 +24,12 @@ public class KnifeJuggler extends AbstractContestant {
     }
 
     @Inject
+    @Named("jugglingKnife")
     public void setKnives(Provider<Knife> knifeProvider) {
         knives = Sets.newHashSet();
         for (int i = 0; i < MAX_KNIVES; i++) {
-           knives.add(knifeProvider.get());
-       }
+            knives.add(knifeProvider.get());
+        }
     }
 
     @Override

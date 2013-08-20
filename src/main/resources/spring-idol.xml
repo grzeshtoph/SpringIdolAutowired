@@ -9,7 +9,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        default-init-method="init">
 
-    <context:annotation-config/>
+    <context:component-scan base-package="com.springinaction.springidol"/>
 
     <util:map id="instrumentSounds">
         <entry key="GUITAR" value="#{T(com.springinaction.springidol.instruments.InstrumentSound).GUITAR}"/>
@@ -44,8 +44,7 @@
         <constructor-arg value="kenny2@gmail.com"/>
     </bean>
 
-    <bean id="eddie" class="com.springinaction.springidol.performers.EddieInstrumentalist"
-          p:song="#{songSelector.selectSong()?.toLowerCase()}" p:age="#{kenny.age}">
+    <bean id="eddie" class="com.springinaction.springidol.performers.EddieInstrumentalist">
         <constructor-arg value="eddie@gmail.com"/>
     </bean>
 
@@ -93,14 +92,13 @@
         </property>
     </bean>
 
-    <bean id="hank4" class="com.springinaction.springidol.performers.OneManLightestBand"
-          p:sounds="#{instrumentSounds.![value.sound]}">
+    <bean id="hank4" class="com.springinaction.springidol.performers.OneManLightestBand">
         <constructor-arg value="hank4@gmail.com"/>
     </bean>
 
-    <bean id="sonnet29" class="com.springinaction.springidol.artifacts.Sonnet29"/>
+    <bean id="jugglingKnife" class="com.springinaction.springidol.artifacts.Knife" scope="prototype"/>
 
-    <bean id="knife" class="com.springinaction.springidol.artifacts.Knife" scope="prototype"/>
+    <bean id="nonJugglingKnife" parent="jugglingKnife"/>
 
     <bean id="saxophone" class="com.springinaction.springidol.instruments.ContestInstrument"
           p:instrumentSound="#{instrumentSounds['SAXOPHONE']}"/>
@@ -111,9 +109,6 @@
     <bean id="cymbal" class="com.springinaction.springidol.instruments.ContestInstrument"
           p:instrumentSound="#{instrumentSounds['CYMBAL']}"/>
 
-    <bean id="guitar" class="com.springinaction.springidol.instruments.Guitar"
-          p:instrumentSound="#{instrumentSounds['GUITAR']}"/>
-
     <bean id="harmonica" class="com.springinaction.springidol.instruments.ContestInstrument"
           p:instrumentSound="#{instrumentSounds['HARMONICA']}"/>
 
@@ -122,18 +117,7 @@
 
     <bean id="songSelector" class="com.springinaction.springidol.SongSelector" factory-method="getInstance"/>
 
-    <bean id="ticketExtra" class="com.springinaction.springidol.Ticket" scope="prototype"
-          p:ticketNo="#{ticketNo}">
-        <constructor-arg value="#{theStage.stageName matches '.*USA.*'}"/>
-    </bean>
+    <bean id="ticketNormal" class="com.springinaction.springidol.Ticket" scope="prototype"/>
 
-    <bean id="ticketNormal" class="com.springinaction.springidol.Ticket" scope="prototype"
-          p:ticketNo="#{ticketNo}">
-        <constructor-arg value="#{theStage.stageName matches '.*PKiN.*'}"/>
-    </bean>
-
-    <bean id="ticketCounter" class="com.springinaction.springidol.TicketCounter"/>
-
-    <bean id="ticketNo" factory-bean="ticketCounter" factory-method="getNextNumber"
-          lazy-init="true"/>
+    <bean id="ticketExtra" parent="ticketNormal"/>
 </beans>

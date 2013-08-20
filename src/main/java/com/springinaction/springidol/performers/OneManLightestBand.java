@@ -3,20 +3,18 @@ package com.springinaction.springidol.performers;
 import com.springinaction.springidol.PerformanceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * The lightests one man band. Knows only sounds he's playing.
  */
 public class OneManLightestBand extends AbstractContestant {
     private static final Logger LOG = LoggerFactory.getLogger(OneManLightestBand.class);
+    @Value("#{instrumentSounds.![value.sound]}")
     private String[] sounds;
 
     protected OneManLightestBand(String email) {
         super(email);
-    }
-
-    public void setSounds(String[] sounds) {
-        this.sounds = sounds;
     }
 
     @Override

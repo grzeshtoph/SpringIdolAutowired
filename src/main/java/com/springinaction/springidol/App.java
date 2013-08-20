@@ -49,7 +49,7 @@ public class App {
         performer = (Performer) ctx.getBean("carl");
         performer.perform();
 
-        Knife knife = (Knife) ctx.getBean("knife");
+        Knife knife = (Knife) ctx.getBean("jugglingKnife");
         knife.printId();
 
         KnifeJuggler toby = (KnifeJuggler) ctx.getBean("toby");
