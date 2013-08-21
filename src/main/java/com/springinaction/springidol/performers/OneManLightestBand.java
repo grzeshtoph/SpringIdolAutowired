@@ -13,7 +13,7 @@ public class OneManLightestBand extends AbstractContestant {
     @Value("#{instrumentSounds.![value.sound]}")
     private String[] sounds;
 
-    protected OneManLightestBand(String email) {
+    public OneManLightestBand(String email) {
         super(email);
     }
 
